@@ -49,7 +49,55 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home'),),
-      
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Center(
+              child: Card(
+                
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50.0, left: 105.0),
+              child: Center(
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.navigate_before),
+                      onPressed: (){},
+                    ),
+                    Text('Example'),
+                    IconButton(
+                      icon: Icon(Icons.navigate_next),
+                      onPressed: (){},
+                    )
+                  ],
+                ),
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: MaterialButton(
+                color: Colors.redAccent,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 32.0, right: 32.0), 
+                  child: Text('Start Game', style: TextStyle(fontSize: 15.0, color: Colors.white),),),
+                onPressed: (){},
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: MaterialButton(
+                color: Colors.grey,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+                  child: Text('Exit', style: TextStyle(fontSize: 15.0, color: Colors.white),),),
+                onPressed: (){},
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 }
