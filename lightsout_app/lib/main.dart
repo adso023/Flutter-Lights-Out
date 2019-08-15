@@ -28,15 +28,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -44,32 +35,67 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  List<Widget> _lstLevels = [
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(1.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(2.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(3.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(4.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(5.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(6.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(7.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(8.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(9.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(10.toString()),),)
+  ];
+
+  Card _currLevel;
+  int _currIndex = 0;
   
   @override
   Widget build(BuildContext context) {
+    _currLevel = _lstLevels.elementAt(_currIndex);
+
     return Scaffold(
       appBar: AppBar(title: Text('Home'),),
       body: Center(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 25.0,),
             Center(
-              child: Card(
-                
-              )
+              child: AnimatedSwitcher(
+                child: _currLevel,
+                duration: const Duration(seconds: 1),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 50.0, left: 105.0),
+              padding: const EdgeInsets.only(top: 50.0, left: 80.0),
               child: Center(
                 child: Row(
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.navigate_before),
-                      onPressed: (){},
+                      icon: Icon(Icons.navigate_before, size: 32.0,),
+                      onPressed: (){
+                        if(_currIndex != 0){
+                          setState(() {
+                           _currIndex-=1; 
+                          });
+                        }
+                      },
                     ),
-                    Text('Example'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Text('Levels', style: TextStyle(fontSize: 20.0),),
+                    ),
                     IconButton(
-                      icon: Icon(Icons.navigate_next),
-                      onPressed: (){},
+                      icon: Icon(Icons.navigate_next, size: 32.0,),
+                      onPressed: (){
+                        if(_currIndex != _lstLevels.length-1){
+                          setState(() {
+                           _currIndex+=1; 
+                          });
+                        }
+                      },
                     )
                   ],
                 ),
