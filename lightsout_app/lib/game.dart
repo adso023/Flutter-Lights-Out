@@ -25,7 +25,6 @@ class _GameState extends State<Game>{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     for(int i = 0; i < dim; i++){
@@ -163,6 +162,8 @@ class _GameState extends State<Game>{
           ],
         ),
       ) : Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           AspectRatio(
             aspectRatio: 1,
