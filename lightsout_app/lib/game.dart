@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Game extends StatefulWidget{
@@ -53,7 +55,9 @@ class _GameState extends State<Game>{
       },
       child: GridTile(
         child: Container(
+          margin: const EdgeInsets.all(4.0),
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
             border: Border.all(color: Colors.black, width: 0.5)
           ),
           child: Container(child: (_states[x][y]) ? Image.asset('assets/images/Light-0.png') : Image.asset('assets/images/Light-1.png')),
@@ -61,20 +65,6 @@ class _GameState extends State<Game>{
       ),
     );
   }
-
-  // Widget getState(bool isOn, bool isClicked){
-  //   if(! isOn && isClicked){
-  //     return Image.asset('assets/images/Light-0.png');
-  //   }else if(! isOn && ! isClicked){
-  //     return Image.asset('assets/images/Light-1.png');
-  //   }else if(isOn && isClicked){
-  //     return Image.asset('assets/images/Light-0.png');
-  //   }else if(isOn && ! isClicked){
-  //     return Image.asset('assets/images/Light-1.png');
-  //   }
-
-  //   return Text('End Statement');
-  // }
 
   void _tappedItems(int x, int y){
     _states[x][y] = !_states[x][y];
@@ -93,6 +83,16 @@ class _GameState extends State<Game>{
     }
 
     _numSteps++;
+  }
+
+  void randomize(){
+    setState(() {
+     for(int i = 0; i < _states.length; i++){
+        for(int j = 0; j < _states[i].length; j++){
+          _states[i][j] = Random().nextBool();
+        }
+      } 
+    });
   }
 
   void _reset(){
@@ -132,33 +132,44 @@ class _GameState extends State<Game>{
       ),
       body: _gameOver ? Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _BlinkingText(),
-            Text('Finished in $_numSteps steps'),
-            MaterialButton(
-              color: Colors.red,
-              child: Text('Reset'),
-              onPressed: _reset,
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Text('Finished in $_numSteps steps', style: TextStyle(fontSize: 15.0),),
             ),
-            MaterialButton(
-              color: Colors.grey,
-              child: Text('Exit'),
-              onPressed: (){
-                Navigator.pop(context);
-              },
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: MaterialButton(
+                elevation: 20.0,
+                color: Colors.red,
+                child: Text('Reset', style: TextStyle(fontSize: 15.0),),
+                onPressed: _reset,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: MaterialButton(
+                elevation: 20.0,
+                color: Colors.grey,
+                child: Text('Exit', style: TextStyle(fontSize: 15.0),),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              ),
             )
           ],
         ),
-      )
-      : Column(
+      ) : Column(
         children: <Widget>[
           AspectRatio(
-            aspectRatio: 1.0,
+            aspectRatio: 1,
             child: Container(
-              padding: const EdgeInsets.all(8.0),
-              margin: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 2.0)
+                border: Border.all(color: Colors.black, width: 1.0),
+                borderRadius: BorderRadius.circular(8.0)
               ),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -172,6 +183,7 @@ class _GameState extends State<Game>{
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Checkbox(
                   value: _showSolution,
@@ -187,7 +199,7 @@ class _GameState extends State<Game>{
                   child: MaterialButton(
                     color: Colors.red,
                     child: Text('Randomize'),
-                    onPressed: (){},
+                    onPressed: randomize,
                   ),
                 ),
                 Padding(
@@ -223,7 +235,6 @@ class _BlinkingTextWidget extends State<_BlinkingText> with TickerProviderStateM
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _animationController = new AnimationController(vsync: this, duration: Duration(seconds: 1));
