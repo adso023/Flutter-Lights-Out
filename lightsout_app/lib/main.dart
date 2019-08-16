@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:lightsout_app/game.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,8 +40,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _lstLevels = [
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(1.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(2.toString()),),),
     Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(3.toString()),),),
     Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(4.toString()),),),
     Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(5.toString()),),),
@@ -46,7 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
     Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(7.toString()),),),
     Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(8.toString()),),),
     Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(9.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(10.toString()),),)
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(10.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(11.toString()),),),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(12.toString()),),)
   ];
 
   Card _currLevel;
@@ -108,7 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 32.0, right: 32.0), 
                   child: Text('Start Game', style: TextStyle(fontSize: 15.0, color: Colors.white),),),
-                onPressed: (){},
+                onPressed: (){
+
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => Game(dim: (_currIndex+3),)
+                  ));
+
+                },
               ),
             ),
             Padding(
@@ -118,7 +127,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 32.0, right: 32.0),
                   child: Text('Exit', style: TextStyle(fontSize: 15.0, color: Colors.white),),),
-                onPressed: (){},
+                onPressed: (){
+                  exit(0);
+                },
               ),
             )
           ],
