@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lightsout_app/game.dart';
 
 void main() => runApp(MyApp());
@@ -9,8 +10,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        brightness: Brightness.dark
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -40,16 +43,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _lstLevels = [
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(3.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(4.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(5.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(6.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(7.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(8.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(9.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(10.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(11.toString()),),),
-    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(12.toString()),),)
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(3.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(4.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(5.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(6.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(7.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(8.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(9.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(10.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(11.toString()),), elevation: 10.0,),
+    Card(child: Padding(padding: const EdgeInsets.all(40.0), child: Text(12.toString()),), elevation: 10.0,)
   ];
 
   Card _currLevel;
@@ -63,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(title: Text('Home'),),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 25.0,),
             Center(
@@ -72,9 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 50.0, left: 80.0),
+              padding: const EdgeInsets.only(top: 50.0),
               child: Center(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(Icons.navigate_before, size: 32.0,),
@@ -114,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: (){
 
                   Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => Game(dim: (_currIndex+3),)
+                    builder: (context) => Game(dim: (_currIndex + 3),)
                   ));
 
                 },
