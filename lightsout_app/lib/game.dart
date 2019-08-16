@@ -56,11 +56,25 @@ class _GameState extends State<Game>{
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 0.5)
           ),
-          child: Container(color: _states[x][y] ? Colors.white : Colors.yellow,),
+          child: Container(child: (_states[x][y]) ? Image.asset('assets/images/Light-0.png') : Image.asset('assets/images/Light-1.png')),
         ),
       ),
     );
   }
+
+  // Widget getState(bool isOn, bool isClicked){
+  //   if(! isOn && isClicked){
+  //     return Image.asset('assets/images/Light-0.png');
+  //   }else if(! isOn && ! isClicked){
+  //     return Image.asset('assets/images/Light-1.png');
+  //   }else if(isOn && isClicked){
+  //     return Image.asset('assets/images/Light-0.png');
+  //   }else if(isOn && ! isClicked){
+  //     return Image.asset('assets/images/Light-1.png');
+  //   }
+
+  //   return Text('End Statement');
+  // }
 
   void _tappedItems(int x, int y){
     _states[x][y] = !_states[x][y];
