@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lightsout_app/game.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,7 +27,31 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         brightness: Brightness.dark
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Screen(),
+    );
+  }
+}
+
+class Screen extends StatefulWidget{
+  @override
+  createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<Screen>{
+  @override
+  Widget build(BuildContext context) {
+    return SplashScreen(
+      seconds: 5,
+      navigateAfterSeconds: MyHomePage(title: 'Lights Out',),
+      title: Text('Lights Out', style: TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white
+      ),),
+      image: Image.asset('assets/images/launch.png'),
+      backgroundColor: Colors.black38,
+      styleTextUnderTheLoader: TextStyle(),
+      onClick: () => print('Lights Out Flutter'),
+      photoSize: 100.0,
+      loaderColor: Colors.white,
     );
   }
 }
