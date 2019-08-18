@@ -61,13 +61,13 @@ class _GameState extends State<Game>{
           margin: const EdgeInsets.all(4.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            border: Border.all(color: Colors.black, width: 0.5)
+            border: Border.all(color: Colors.black54, width: 0.5)
           ),
           child: Container(
-            child: (_states[x][y]) ? Image.asset('assets/images/Light-0.png', fit: BoxFit.fill,) : Image.asset('assets/images/Light-1.png', fit: BoxFit.fill,),
+            color: (_states[x][y]) ? Colors.lightGreenAccent : Colors.black),
         ),
       ),
-    ));
+    );
   }
 
   void _tappedItems(int x, int y){
