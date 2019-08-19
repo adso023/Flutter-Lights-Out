@@ -56,12 +56,11 @@ class _GameState extends State<Game>{
       },
       child: GridTile(
         child: Container(
-          width: MediaQuery.of(context).size.width / dim,
-          height: MediaQuery.of(context).size.width / dim,
-          margin: const EdgeInsets.all(4.0),
+          margin: const EdgeInsets.all(2.0),
+          padding: const EdgeInsets.all(2.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            border: Border.all(color: Colors.black54, width: 0.5)
+            borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(color: Colors.white, width: 0.5)
           ),
           child: Container(
             color: (_states[x][y]) ? Colors.lightGreenAccent : Colors.black),
@@ -127,6 +126,8 @@ class _GameState extends State<Game>{
   @override
   Widget build(BuildContext context) {
 
+    int i = 0;
+
     
     _gameOver = _checkFinished();
 
@@ -173,8 +174,9 @@ class _GameState extends State<Game>{
           AspectRatio(
             aspectRatio: 1,
             child: Container(
+              padding: const EdgeInsets.all(4.0),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1.0),
+                border: Border.all(color: Colors.white54, width: 1.0),
                 borderRadius: BorderRadius.circular(8.0)
               ),
               child: GridView.builder(
@@ -194,9 +196,14 @@ class _GameState extends State<Game>{
                 Checkbox(
                   value: _showSolution,
                   onChanged: (bool newValue){
-                    setState(() {
-                     _showSolution = newValue; 
-                    });
+                    return showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => AlertDialog(
+                        content: Text('Feature not Implemented Yet\nComing Soon'),
+                        actions: <Widget>[CloseButton()],
+                      )
+                    );
                   },
                 ),
                 ! _showSolution ? Text('Show Solution') : Text('Hide Solution'),
